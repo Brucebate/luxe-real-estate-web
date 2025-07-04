@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -18,8 +18,7 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Basic validation
+
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
       toast({
         title: "Please fill in all required fields",
@@ -28,13 +27,11 @@ const Contact = () => {
       return;
     }
 
-    // Simulate form submission
     toast({
       title: "Message sent successfully!",
       description: "We'll get back to you within 24 hours."
     });
 
-    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -53,23 +50,31 @@ const Contact = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative h-64 bg-gradient-to-r from-blue-600 to-blue-800">
+      <section className="relative h-64 bg-gradient-to-r from-[#0A1D37] to-[#D4AF37]">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10 flex items-center justify-center h-full">
-          <div className="text-center text-white">
-            <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center text-white"
+          >
+            <h1 className="text-4xl font-bold mb-4 font-serif">Contact Us</h1>
             <p className="text-lg opacity-90">Let's discuss your real estate needs</p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-12">
+      <section className="py-16 bg-[#f8f9fa]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold text-[#0A1D37] mb-6 font-serif">Get in Touch</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -118,7 +123,7 @@ const Contact = () => {
                       name="inquiryType"
                       value={formData.inquiryType}
                       onChange={handleChange}
-                      className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="mt-1 flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2"
                     >
                       <option value="residential">Residential</option>
                       <option value="commercial">Commercial</option>
@@ -137,61 +142,86 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="mt-1 flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="mt-1 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2"
                     placeholder="Tell us about your requirements..."
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full">
+                <Button type="submit" size="lg" className="w-full bg-[#D4AF37] text-[#0A1D37] hover:bg-[#0A1D37] hover:text-[#D4AF37]">
                   Send Message
                 </Button>
               </form>
-            </div>
+            </motion.div>
 
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Information</h2>
-              
-              <div className="space-y-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Residential Inquiries</h3>
-                  <div className="space-y-2 text-gray-600">
-                    <p>Email: homes@luxerealty.com</p>
-                    <p>Phone: +1 (555) 123-4567</p>
-                    <p>Hours: Mon-Sat 9:00 AM - 6:00 PM</p>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <h2 className="text-3xl font-bold text-[#0A1D37] mb-6 font-serif">Contact Information</h2>
+
+              {[{
+                title: "Residential Inquiries",
+                email: "homes@TheRoyalDwellingCo.com",
+                phone: "+1 (555) 123-4567",
+                hours: "Mon-Sat 9:00 AM – 6:00 PM"
+              }, {
+                title: "Commercial Inquiries",
+                email: "offices@TheRoyalDwellingCo.com",
+                phone: "+1 (555) 123-4568",
+                hours: "Mon-Fri 9:00 AM – 7:00 PM"
+              }, {
+                title: "Head Office",
+                address: [
+                  "123 Business District",
+                  "City Center, State 12345"
+                ],
+                phone: "+1 (555) 123-4569"
+              }].map((info, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white p-6 rounded-lg shadow-md"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 12px 25px rgba(0, 0, 0, 0.15)" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-lg font-semibold text-[#0A1D37] mb-3">{info.title}</h3>
+                  <div className="text-gray-600 space-y-1 text-sm">
+                    {info.email && <p>Email: {info.email}</p>}
+                    {info.phone && <p>Phone: {info.phone}</p>}
+                    {info.hours && <p>Hours: {info.hours}</p>}
+                    {info.address && info.address.map((line, i) => <p key={i}>{line}</p>)}
                   </div>
-                </div>
-
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Commercial Inquiries</h3>
-                  <div className="space-y-2 text-gray-600">
-                    <p>Email: offices@luxerealty.com</p>
-                    <p>Phone: +1 (555) 123-4568</p>
-                    <p>Hours: Mon-Fri 9:00 AM - 7:00 PM</p>
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Head Office</h3>
-                  <div className="space-y-2 text-gray-600">
-                    <p>123 Business District</p>
-                    <p>City Center, State 12345</p>
-                    <p>Phone: +1 (555) 123-4569</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <div className="text-4xl mb-2">📍</div>
-                  <p>Interactive Map</p>
-                  <p className="text-sm">Google Maps integration would go here</p>
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
+
+        {/* Full Width Map */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8 }}
+          className="mt-12 w-full"
+        >
+          <iframe
+            title="Google Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019498117094!2d-122.42067908468104!3d37.77851917975725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c5d07000d%3A0x46371ea867593c77!2sCity%20Center!5e0!3m2!1sen!2sus!4v1628082184879!5m2!1sen!2sus"
+            width="100%"
+            height="400"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full rounded-lg shadow-md"
+          ></iframe>
+        </motion.div>
       </section>
     </Layout>
   );
