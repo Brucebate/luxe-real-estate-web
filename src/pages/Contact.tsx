@@ -13,23 +13,28 @@ const Contact = () => {
     email: "",
     phone: "",
     inquiryType: "residential",
-    message: ""
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.message
+    ) {
       toast({
         title: "Please fill in all required fields",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
     toast({
       title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours."
+      description: "We'll get back to you within 24 hours.",
     });
 
     setFormData({
@@ -37,14 +42,18 @@ const Contact = () => {
       email: "",
       phone: "",
       inquiryType: "residential",
-      message: ""
+      message: "",
     });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -60,7 +69,9 @@ const Contact = () => {
             className="text-center text-white"
           >
             <h1 className="text-4xl font-bold mb-4 font-serif">Contact Us</h1>
-            <p className="text-lg opacity-90">Let's discuss your real estate needs</p>
+            <p className="text-lg opacity-90">
+              Let's discuss your real estate needs
+            </p>
           </motion.div>
         </div>
       </section>
@@ -74,7 +85,9 @@ const Contact = () => {
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold text-[#0A1D37] mb-6 font-serif">Get in Touch</h2>
+              <h2 className="text-3xl font-bold text-[#0A1D37] mb-6 font-serif">
+                Get in Touch
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -147,7 +160,11 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full bg-[#D4AF37] text-[#0A1D37] hover:bg-[#0A1D37] hover:text-[#D4AF37]">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-[#D4AF37] text-[#0A1D37] hover:bg-[#0A1D37] hover:text-[#D4AF37]"
+                >
                   Send Message
                 </Button>
               </form>
@@ -160,41 +177,53 @@ const Contact = () => {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-[#0A1D37] mb-6 font-serif">Contact Information</h2>
+              <h2 className="text-3xl font-bold text-[#0A1D37] mb-6 font-serif">
+                Contact Information
+              </h2>
 
-              {[{
-                title: "Residential Inquiries",
-                email: "homes@TheRoyalDwellingCo.com",
-                phone: "+1 (555) 123-4567",
-                hours: "Mon-Sat 9:00 AM – 6:00 PM"
-              }, {
-                title: "Commercial Inquiries",
-                email: "offices@TheRoyalDwellingCo.com",
-                phone: "+1 (555) 123-4568",
-                hours: "Mon-Fri 9:00 AM – 7:00 PM"
-              }, {
-                title: "Head Office",
-                address: [
-                  "123 Business District",
-                  "City Center, State 12345"
-                ],
-                phone: "+1 (555) 123-4569"
-              }].map((info, index) => (
+              {[
+                {
+                  title: "Residential Inquiries",
+                  email: "homes@TheRoyalDwellingCo.com",
+                  phone: "+1 (555) 123-4567",
+                  hours: "Mon-Sat 9:00 AM – 6:00 PM",
+                },
+                {
+                  title: "Commercial Inquiries",
+                  email: "offices@TheRoyalDwellingCo.com",
+                  phone: "+1 (555) 123-4568",
+                  hours: "Mon-Fri 9:00 AM – 7:00 PM",
+                },
+                {
+                  title: "Head Office",
+                  address: [
+                    "123 Business District",
+                    "City Center, State 12345",
+                  ],
+                  phone: "+1 (555) 123-4569",
+                },
+              ].map((info, index) => (
                 <motion.div
                   key={index}
                   className="bg-white p-6 rounded-lg shadow-md"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.2 }}
-                  whileHover={{ scale: 1.03, boxShadow: "0 12px 25px rgba(0, 0, 0, 0.15)" }}
+                  whileHover={{
+                    scale: 1.03,
+                    boxShadow: "0 12px 25px rgba(0, 0, 0, 0.15)",
+                  }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-lg font-semibold text-[#0A1D37] mb-3">{info.title}</h3>
+                  <h3 className="text-lg font-semibold text-[#0A1D37] mb-3">
+                    {info.title}
+                  </h3>
                   <div className="text-gray-600 space-y-1 text-sm">
                     {info.email && <p>Email: {info.email}</p>}
                     {info.phone && <p>Phone: {info.phone}</p>}
                     {info.hours && <p>Hours: {info.hours}</p>}
-                    {info.address && info.address.map((line, i) => <p key={i}>{line}</p>)}
+                    {info.address &&
+                      info.address.map((line, i) => <p key={i}>{line}</p>)}
                   </div>
                 </motion.div>
               ))}
@@ -212,7 +241,7 @@ const Contact = () => {
         >
           <iframe
             title="Google Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019498117094!2d-122.42067908468104!3d37.77851917975725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c5d07000d%3A0x46371ea867593c77!2sCity%20Center!5e0!3m2!1sen!2sus!4v1628082184879!5m2!1sen!2sus"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.9050953727!2d78.24323113439742!3d17.412608642828793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1751930212355!5m2!1sen!2sin"
             width="100%"
             height="400"
             style={{ border: 0 }}
