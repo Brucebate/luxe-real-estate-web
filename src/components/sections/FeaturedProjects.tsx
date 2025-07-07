@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -9,8 +8,9 @@ const FeaturedProjects = () => {
       name: "The Pearl",
       type: "Residential",
       location: "Downtown District",
-      image: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=5760&q=80",
-      description: "Luxury 4 BHK Sky Mansions with panoramic city views and world-class amenities.",
+      video: "/video2.mp4",
+      description:
+        "Luxury 4 BHK Sky Mansions with panoramic city views and world-class amenities.",
       features: ["4 BHK Apartments", "Sky Garden", "Infinity Pool", "Smart Home"]
     },
     {
@@ -18,8 +18,9 @@ const FeaturedProjects = () => {
       name: "The Regent",
       type: "Residential",
       location: "Tech Corridor",
-      image: "https://images.unsplash.com/photo-1459767129954-1b1c1f9b9ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=5760&q=80",
-      description: "Premium 3 BHK apartments designed for modern living with sustainable features.",
+      video: "/video3.mp4",
+      description:
+        "Premium 3 BHK apartments designed for modern living with sustainable features.",
       features: ["3 BHK Apartments", "Green Building", "Fitness Center", "Children's Play Area"]
     },
     {
@@ -27,56 +28,74 @@ const FeaturedProjects = () => {
       name: "Galaxy Tower",
       type: "Commercial",
       location: "Business Hub",
-      image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511?ixlib=rb-4.0.3&auto=format&fit=crop&w=5512&q=80",
-      description: "Grade A office spaces with LEED Gold certification and cutting-edge technology.",
+      video: "/video4.mp4",
+      description:
+        "Grade A office spaces with LEED Gold certification and cutting-edge technology.",
       features: ["Grade A Offices", "LEED Gold", "High-Speed Elevators", "24/7 Security"]
     }
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-20 bg-[#f9f9f9]">
       <div className="container mx-auto px-4 lg:px-8">
+        {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-[#0A1D37] font-serif mb-4">Featured Projects</h2>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
             Discover our flagship developments that showcase our commitment to excellence, 
             innovation, and sustainable living.
           </p>
         </div>
 
+        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div key={project.id} className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              {/* Video */}
+              <div className="relative overflow-hidden rounded-t-xl">
+                <video
+                  src={project.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-[#D4AF37] text-[#0A1D37] px-3 py-1 rounded-full text-sm font-semibold shadow">
                     {project.type}
                   </span>
                 </div>
               </div>
-              
+
+              {/* Project Info */}
               <div className="p-6">
                 <div className="mb-2">
-                  <h3 className="text-xl font-bold text-gray-900">{project.name}</h3>
-                  <p className="text-gray-600">{project.location}</p>
+                  <h3 className="text-xl font-bold text-[#0A1D37]">{project.name}</h3>
+                  <p className="text-sm text-gray-600 italic">{project.location}</p>
                 </div>
-                
+
                 <p className="text-gray-700 mb-4">{project.description}</p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.features.map((feature) => (
-                    <span key={feature} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">
+                    <span
+                      key={feature}
+                      className="bg-[#f4f1e6] text-[#0A1D37] px-3 py-1 rounded-full text-sm font-medium"
+                    >
                       {feature}
                     </span>
                   ))}
                 </div>
-                
-                <Button asChild className="w-full">
+
+                <Button
+                  asChild
+                  className="w-full bg-[#D4AF37] text-[#0A1D37] hover:bg-[#0A1D37] hover:text-[#D4AF37] rounded-full transition-colors duration-300 font-semibold"
+                >
                   <Link to={`/projects/${project.id}`}>View Details</Link>
                 </Button>
               </div>
@@ -84,8 +103,14 @@ const FeaturedProjects = () => {
           ))}
         </div>
 
+        {/* View All */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" asChild>
+          <Button
+            variant="outline"
+            size="lg"
+            className="border-[#0A1D37] text-[#0A1D37] hover:bg-[#0A1D37] hover:text-[#D4AF37] font-semibold rounded-full"
+            asChild
+          >
             <Link to="/projects">View All Projects</Link>
           </Button>
         </div>
